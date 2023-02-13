@@ -281,7 +281,7 @@ export class PipelineSimplePattern extends BaseConstruct {
         // const githubOwnerName = "modularcloud"
         // const githubRepository = "ChainDataPuller-Hub-DymensionLocaltestnet-DEV"
 
-        const githubOwnerName = "mhs"
+        const githubOwnerName = "mhsss"
         const githubRepository = "release_cdk_v2"
         const nameOfGithubPersonTokenParameterAsString = "modular-cloud-aws-code-pipeline-personal-access-token"
         
