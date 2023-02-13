@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { AppContext, AppContextError } from '../lib/template/app-context';
+import { AppContext, AppContextError, ProjectPrefixType } from '../lib/template/app-context';
 
 // import { Approach1PipelineStack } from './stack/sample1/approach1-pipeline-stack'
 // import { Approach2PipelineStack } from './stack/sample1/approach2-pipeline-stack'
@@ -14,10 +14,7 @@ import { Sample3ServiceStack } from './stack/sample3/sample3-service-stack'
 
 
 try {
-    const appContext = new AppContext({
-        appConfigFileKey: 'APP_CONFIG',
-    });
-
+   
     // // Sample1
     // if (appContext.appConfig.Stack.Approach1Pipeline) {
     //     new Approach1PipelineStack(appContext, appContext.appConfig.Stack.Approach1Pipeline);
@@ -47,10 +44,21 @@ try {
     // }
 
     // Sample3
+    let appContext = new AppContext({
+        appConfigFileKey: 'APP_CONFIG',
+        
+    });
     if (appContext.appConfig.Stack.Sample3Pipeline) {
         new Sample3MultipleTargetStack(appContext, appContext.appConfig.Stack.Sample3Pipeline);
     }
+    
+
     if (appContext.appConfig.Stack.Sample3Service1) {
+        appContext = new AppContext({
+            appConfigFileKey: 'APP_CONFIG',
+            projectPrefixType: ProjectPrefixType.NameHyphenStage
+            
+        });
         new Sample3ServiceStack(appContext, appContext.appConfig.Stack.Sample3Service1);
     }
 
