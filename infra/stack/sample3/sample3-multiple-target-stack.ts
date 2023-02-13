@@ -17,7 +17,7 @@ export class Sample3MultipleTargetStack extends base.PipelineBaseStack {
 
     @Override
     onPipelineName(): string {
-        return 'Infra';
+        return 'Infrastructure';
     }
 
     @Override

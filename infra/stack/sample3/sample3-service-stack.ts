@@ -16,6 +16,7 @@ export class Sample3ServiceStack extends base.BaseStack {
     constructor(appContext: AppContext, stackConfig: any) {
         super(appContext, stackConfig);
 
+        const resourceSuffix = appContext.stackCommonProps.projectPrefix
         // const githubOwnerName = "modularcloud"
 
         // const githubRepository = "ChainDataPuller-Hub-DymensionLocaltestnet-DEV"
@@ -31,22 +32,22 @@ export class Sample3ServiceStack extends base.BaseStack {
         
         //default: `${this.stackName}`
     
-        const ecrRepo = new ecr.Repository(this, 'ecrRepo');
+        const ecrRepo = new ecr.Repository(this, 'ecr-repo-' + resourceSuffix);
     
         /**
          * create a new vpc with single nat gateway
          */
-        const vpc = new ec2.Vpc(this, 'ecs-cdk-vpc', {
+        const vpc = new ec2.Vpc(this, 'ecs-vpc', {
           cidr: '10.0.0.0/16',
           natGateways: 1,
           maxAzs: 3  /* does a sample need 3 az's? */
         });
     
-        const clusteradmin = new iam.Role(this, 'adminrole', {
+        const clusteradmin = new iam.Role(this, 'adminrole-'+ resourceSuffix, {
           assumedBy: new iam.AccountRootPrincipal()
         });
     
-        const cluster = new ecs.Cluster(this, "ecs-cluster", {
+        const cluster = new ecs.Cluster(this, "ecs-cluster-" + + resourceSuffix, {
           vpc: vpc,
         });
     
@@ -54,7 +55,7 @@ export class Sample3ServiceStack extends base.BaseStack {
           streamPrefix: "ecs-logs"
         });
     
-        const taskrole = new iam.Role(this, `ecs-taskrole-${this.stackName}`, {
+        const taskrole = new iam.Role(this, 'ecs-taskrole-' + resourceSuffix, {
           roleName: `ecs-taskrole-${this.stackName}`,
           assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com')
         });
@@ -76,7 +77,7 @@ export class Sample3ServiceStack extends base.BaseStack {
                 ]
         });
     
-        const taskDef = new ecs.FargateTaskDefinition(this, "ecs-taskdef", {
+        const taskDef = new ecs.FargateTaskDefinition(this, "ecs-taskdef-" + resourceSuffix, {
           taskRole: taskrole
         });
     
@@ -95,7 +96,7 @@ export class Sample3ServiceStack extends base.BaseStack {
           protocol: ecs.Protocol.TCP
         });
     
-        const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, "ecs-service", {
+        const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, "ecs-service-" + resourceSuffix, {
           cluster: cluster,
           taskDefinition: taskDef,
           publicLoadBalancer: true,
@@ -123,8 +124,8 @@ export class Sample3ServiceStack extends base.BaseStack {
         });
     
         // codebuild - project
-        const project = new codebuild.Project(this, 'Project2-' + serviceName, {
-          projectName: `Project2-${this.stackName}` ,
+        const project = new codebuild.Project(this, 'project-' + resourceSuffix, {
+          projectName: 'project-' + resourceSuffix,
           source: gitHubSource,
           environment: {
             buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_2,

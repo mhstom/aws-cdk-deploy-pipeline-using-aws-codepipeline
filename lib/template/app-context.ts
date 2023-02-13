@@ -114,7 +114,7 @@ export class AppContext {
     }
 
     private getProjectPrefix(projectName: string, projectStage: string): string {
-        let prefix = `${projectName}${projectStage}`;
+        let prefix = `${projectName}-${projectStage}`;
 
         if (this.appContextProps.projectPrefixType === ProjectPrefixType.NameHyphenStage) {
             prefix = `${projectName}-${projectStage}`;
