@@ -186,66 +186,6 @@ export class Sample3ServiceStack extends base.BaseStack {
         });
     
     
-    
-        // ***pipeline actions***
-    
-        const sourceOutput = new codepipeline.Artifact();
-        const buildOutput = new codepipeline.Artifact();
-        const nameOfGithubPersonTokenParameterAsString = githubPersonalTokenSecretName
-        const sourceAction = new codepipeline_actions.GitHubSourceAction({
-          actionName: 'github_source',
-          owner: githubOwnerName,
-          repo: githubRepository,
-          branch: 'main',
-          oauthToken: cdk.SecretValue.secretsManager(nameOfGithubPersonTokenParameterAsString),
-          output: sourceOutput
-        });
-    
-        const buildAction = new codepipeline_actions.CodeBuildAction({
-          actionName: 'codebuild',
-          project: project,
-          input: sourceOutput,
-          outputs: [buildOutput], // optional
-        });
-    
-        const manualApprovalAction = new codepipeline_actions.ManualApprovalAction({
-          actionName: 'approve',
-        });
-    
-        const deployAction = new codepipeline_actions.EcsDeployAction({
-          actionName: 'deployAction',
-          service: fargateService.service,
-          imageFile: new codepipeline.ArtifactPath(buildOutput, `imagedefinitions.json`)
-        });
-    
-    
-    
-        // pipeline stages
-    
-    
-        // NOTE - Approve action is commented out!
-        new codepipeline.Pipeline(this, 'ecspipeline', {
-          stages: [
-            {
-              stageName: 'source',
-              actions: [sourceAction],
-            },
-            {
-              stageName: 'build',
-              actions: [buildAction],
-            },
-            {
-              stageName: 'approve',
-              actions: [manualApprovalAction],
-            },
-            {
-              stageName: 'deploy-to-ecs',
-              actions: [deployAction],
-            }
-          ]
-        });
-    
-    
         ecrRepo.grantPullPush(project.role!)
         project.addToRolePolicy(new iam.PolicyStatement({
           actions: [
