@@ -17,14 +17,14 @@ export class Sample3MultipleTargetStack extends base.PipelineBaseStack {
 
     @Override
     onPipelineName(): string {
-        return 'MultiTargetPipeline';
+        return 'Infra';
     }
 
     @Override
     onActionFlow(): pipeline.ActionProps[] {
         return [
             {
-                Name: "GitClone",
+                Name: "GitSource",
                 Stage: "SourceStage",
                 Kind: pipeline.ActionKind.SourceCodeCommit,
                 Enable: true,
@@ -35,7 +35,7 @@ export class Sample3MultipleTargetStack extends base.PipelineBaseStack {
             },
             {
                 Name: "TestDeployStacks",
-                Stage: "TestStage",
+                Stage: "Test Stage",
                 Kind: pipeline.ActionKind.BuildCodeBuild,
                 Enable: true,
                 Detail: {
@@ -47,7 +47,7 @@ export class Sample3MultipleTargetStack extends base.PipelineBaseStack {
             },
             {
                 Name: "ApproveManually",
-                Stage: "ApproveStage",
+                Stage: "Approve Stage",
                 Kind: pipeline.ActionKind.ApproveManual,
                 Enable: true,
                 Detail: {
@@ -56,7 +56,7 @@ export class Sample3MultipleTargetStack extends base.PipelineBaseStack {
             },
             {
                 Name: "ProdDeployStacks",
-                Stage: "ProdStage",
+                Stage: "Prod Stage",
                 Kind: pipeline.ActionKind.BuildCodeBuild,
                 Enable: true,
                 Detail: {

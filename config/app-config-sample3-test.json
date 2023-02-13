@@ -1,7 +1,7 @@
 {
     "Project": {
-        "Name": "HelloWorld",
-        "Stage": "Test",
+        "Name": "ChainDataPuller-Hub-DymensionLocaltestnet",
+        "Stage": "DEV",
         "Account": "981110247318",
         "Region": "us-east-2",
         "Profile": "cdk-demo"

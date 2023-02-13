@@ -1,7 +1,7 @@
 {
     "Project": {
-        "Name": "Pipeline",
-        "Stage": "Sample3",
+        "Name": "ChainDataPuller-Hub-DymensionLocaltestnet",
+        "Stage": "",
         "Account": "981110247318",
         "Region": "us-east-2",
         "Profile": "cdk-demo"
@@ -9,7 +9,7 @@
 
     "Stack": {
         "Sample3Pipeline": {
-            "Name": "Sample3PipelineStack"
+            "Name": "InfraStack"
         }
     }
 }
