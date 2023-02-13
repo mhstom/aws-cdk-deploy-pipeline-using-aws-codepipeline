@@ -9,7 +9,7 @@
 
     "Stack": {
         "Sample3Pipeline": {
-            "Name": "InfraStack"
+            "Name": "InfrastructureStack"
         }
     }
 }

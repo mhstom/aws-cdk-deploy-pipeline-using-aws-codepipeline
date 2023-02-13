@@ -43,11 +43,11 @@ export class Sample3ServiceStack extends base.BaseStack {
           maxAzs: 3  /* does a sample need 3 az's? */
         });
     
-        const clusteradmin = new iam.Role(this, 'adminrole-'+ resourceSuffix, {
+        const clusteradmin = new iam.Role(this, 'adminrole-' + resourceSuffix, {
           assumedBy: new iam.AccountRootPrincipal()
         });
     
-        const cluster = new ecs.Cluster(this, "ecs-cluster-" + + resourceSuffix, {
+        const cluster = new ecs.Cluster(this, "ecs-cluster-" + resourceSuffix, {
           vpc: vpc,
         });
     
@@ -56,7 +56,7 @@ export class Sample3ServiceStack extends base.BaseStack {
         });
     
         const taskrole = new iam.Role(this, 'ecs-taskrole-' + resourceSuffix, {
-          roleName: `ecs-taskrole-${this.stackName}`,
+          roleName: 'ecs-taskrole-' + resourceSuffix,
           assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com')
         });
     
