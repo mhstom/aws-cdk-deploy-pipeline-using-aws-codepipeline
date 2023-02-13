@@ -281,15 +281,15 @@ export class PipelineSimplePattern extends BaseConstruct {
         // const githubOwnerName = "modularcloud"
         // const githubRepository = "ChainDataPuller-Hub-DymensionLocaltestnet-DEV"
 
-        const githubOwnerName = "mhsss"
-        const githubRepository = "release_cdk_v2"
+        const githubOwnerName = "mhstom"
+        const githubRepository = "aws-cdk-deploy-pipeline-using-aws-codepipeline"
         const nameOfGithubPersonTokenParameterAsString = "modular-cloud-aws-code-pipeline-personal-access-token"
         
         const action = new codepipeline_actions.GitHubSourceAction({
             actionName: 'github_source',
             owner: githubOwnerName,
             repo: githubRepository,
-            branch: 'main',
+            branch: 'release_cdk_v2',
             oauthToken: cdk.SecretValue.secretsManager(nameOfGithubPersonTokenParameterAsString),
             output: this.sourceOutput
           });
