@@ -16,7 +16,7 @@ export class Sample3ServiceStack extends base.BaseStack {
     constructor(appContext: AppContext, stackConfig: any) {
         super(appContext, stackConfig);
 
-        const resourceSuffix = appContext.stackCommonProps.projectPrefix
+        const resourceSuffix = appContext.stackCommonProps.projectPrefix + 'x'
         // const githubOwnerName = "modularcloud"
 
         // const githubRepository = "ChainDataPuller-Hub-DymensionLocaltestnet-DEV"
