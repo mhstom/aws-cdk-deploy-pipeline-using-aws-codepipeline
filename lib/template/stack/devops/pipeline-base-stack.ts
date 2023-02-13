@@ -41,7 +41,7 @@ export abstract class PipelineBaseStack extends base.BaseStack {
         const pipelineName = this.onPipelineName();
         const actionFlow = this.onActionFlow();
 
-        this.simplePipeline = new pipeline.PipelineSimplePattern(this, 'SimplePipeline', {
+        this.simplePipeline = new pipeline.PipelineSimplePattern(this, 'Pipeline', {
             pipelineName,
             actionFlow,
             stackConfig,
