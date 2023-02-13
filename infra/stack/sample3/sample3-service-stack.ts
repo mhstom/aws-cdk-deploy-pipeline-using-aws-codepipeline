@@ -37,7 +37,7 @@ export class Sample3ServiceStack extends base.BaseStack {
         /**
          * create a new vpc with single nat gateway
          */
-        const vpc = new ec2.Vpc(this, 'ecs-vpc', {
+        const vpc = new ec2.Vpc(this, 'ecs-vpc-' + resourceSuffix, {
           cidr: '10.0.0.0/16',
           natGateways: 1,
           maxAzs: 3  /* does a sample need 3 az's? */
@@ -202,6 +202,7 @@ export class Sample3ServiceStack extends base.BaseStack {
     
         new cdk.CfnOutput(this, "image", { value: ecrRepo.repositoryUri+":latest"} )
         new cdk.CfnOutput(this, 'loadbalancerdns', { value: fargateService.loadBalancer.loadBalancerDnsName });
-
+        new cdk.CfnOutput(this, 'projectArn', { value: project.projectArn });
+        new cdk.CfnOutput(this, 'fargateServiceClusterArnArn', { value: fargateService.service.cluster.clusterArn});
     }
 }
