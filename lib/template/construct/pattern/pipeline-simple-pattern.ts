@@ -261,21 +261,38 @@ export class PipelineSimplePattern extends BaseConstruct {
     }
 
     private createActionSourceCodeCommit(actionName: string, props: SourceKindCodeCommitProps, runOrder?: number): codepipeline.IAction {
-        const repo = codecommit.Repository.fromRepositoryName(
-            this,
-            'CodeCommit-Repository',
-            props.RepositoryName,
-        );
+        // const repo = codecommit.Repository.fromRepositoryName(
+        //     this,
+        //     'CodeCommit-Repository',
+        //     props.RepositoryName,
+        // );
 
         this.sourceOutput = new codepipeline.Artifact('SourceOutput')
-        const action = new codepipeline_actions.CodeCommitSourceAction({
-            actionName: actionName,
-            repository: repo,
-            output: this.sourceOutput,
-            branch: props.BranchName,
-            codeBuildCloneOutput: true,
-            runOrder: runOrder
-        });
+        // const action = new codepipeline_actions.CodeCommitSourceAction({
+        //     actionName: actionName,
+        //     repository: repo,
+        //     output: this.sourceOutput,
+        //     branch: props.BranchName,
+        //     codeBuildCloneOutput: true,
+        //     runOrder: runOrder
+        // });
+
+
+        // const githubOwnerName = "modularcloud"
+        // const githubRepository = "ChainDataPuller-Hub-DymensionLocaltestnet-DEV"
+
+        const githubOwnerName = "mhs"
+        const githubRepository = "release_cdk_v2"
+        const nameOfGithubPersonTokenParameterAsString = "modular-cloud-aws-code-pipeline-personal-access-token"
+        
+        const action = new codepipeline_actions.GitHubSourceAction({
+            actionName: 'github_source',
+            owner: githubOwnerName,
+            repo: githubRepository,
+            branch: 'main',
+            oauthToken: cdk.SecretValue.secretsManager(nameOfGithubPersonTokenParameterAsString),
+            output: this.sourceOutput
+          });
 
         return action;
     }
