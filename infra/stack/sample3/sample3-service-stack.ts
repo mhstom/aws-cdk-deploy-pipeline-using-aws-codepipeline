@@ -201,10 +201,10 @@ export class Sample3ServiceStack extends base.BaseStack {
     
         new cdk.CfnOutput(this, "image" + resourceSuffix, { value: ecrRepo.repositoryUri+":latest"} )
         new cdk.CfnOutput(this, 'loadbalancerdns' + resourceSuffix , { value: fargateService.loadBalancer.loadBalancerDnsName });
-        new cdk.CfnOutput(this, 'projectArn' + resourceSuffix, { value: project.projectArn, exportName: 'projectArn' + resourceSuffix});
+        new cdk.CfnOutput(this, 'projectArn' + resourceSuffix, { value: project.projectArn, exportName: 'projectArn-' + resourceSuffix});
         new cdk.CfnOutput(this, 'projectName' + resourceSuffix, { value: project.projectName, exportName: 'projectName-' + resourceSuffix});
         new cdk.CfnOutput(this, 'fargateServiceClusterArn' + resourceSuffix, { value: fargateService.service.cluster.clusterArn,  exportName: 'fargateServiceClusterArn-' + resourceSuffix});
-        new cdk.CfnOutput(this, 'fargateServiceArn' + resourceSuffix, { value: fargateService.service.serviceArn, exportName: 'fargateServiceArn' + resourceSuffix});
+        new cdk.CfnOutput(this, 'fargateServiceArn' + resourceSuffix, { value: fargateService.service.serviceArn, exportName: 'fargateServiceArn-' + resourceSuffix});
         new cdk.CfnOutput(this, 'fargateServiceName' + resourceSuffix, { value: fargateService.service.serviceName, exportName: 'fargateServiceName-' + resourceSuffix});
     }
 }

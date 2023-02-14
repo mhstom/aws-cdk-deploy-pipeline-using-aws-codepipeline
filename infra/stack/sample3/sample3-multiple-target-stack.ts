@@ -34,8 +34,8 @@ export class Sample3MultipleTargetStack extends base.PipelineBaseStack {
                 }
             },
             {
-                Name: "TestDeployStacks",
-                Stage: "TestStage",
+                Name: "DevDeployStack",
+                Stage: "DevStage",
                 Kind: pipeline.ActionKind.BuildCodeBuild,
                 Enable: true,
                 Detail: {
@@ -55,7 +55,7 @@ export class Sample3MultipleTargetStack extends base.PipelineBaseStack {
                 }
             },
             {
-                Name: "ProdDeployStacks",
+                Name: "ProdDeployStack",
                 Stage: "ProdStage",
                 Kind: pipeline.ActionKind.BuildCodeBuild,
                 Enable: true,
