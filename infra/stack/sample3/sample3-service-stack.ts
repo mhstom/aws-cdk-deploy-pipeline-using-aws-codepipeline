@@ -37,7 +37,7 @@ export class Sample3ServiceStack extends base.BaseStack {
         /**
          * create a new vpc with single nat gateway
          */
-        const vpc = new ec2.Vpc(this, 'ecs-vpc-' + resourceSuffix, {
+        const vpc = new ec2.Vpc(this, 'ecs-vpc', {
           cidr: '10.0.0.0/16',
           natGateways: 1,
           maxAzs: 3  /* does a sample need 3 az's? */
