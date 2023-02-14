@@ -84,7 +84,7 @@ export class Sample3ServiceStack extends base.BaseStack {
         taskDef.addToExecutionRolePolicy(executionRolePolicy);
     
         const baseImage = 'public.ecr.aws/amazonlinux/amazonlinux:2022'
-        const container = taskDef.addContainer("Container-" + serviceName, {
+        const container = taskDef.addContainer("container-" + resourceSuffix, {
           image: ecs.ContainerImage.fromRegistry(baseImage),
           memoryLimitMiB: 256,
           cpu: 256,
@@ -139,7 +139,7 @@ export class Sample3ServiceStack extends base.BaseStack {
               value: `${ecrRepo.repositoryUri}`
             },
             'container_image_file': {
-              value: '[{\"name\":\"Container-' + `${this.stackName}` + '\",\"imageUri\":\"%s\"}]'
+              value: '[{\"name\":\"Container-' + resourceSuffix + '\",\"imageUri\":\"%s\"}]'
             },
             'github_person_token': {
               value: githubPersonalTokenSecretName,
