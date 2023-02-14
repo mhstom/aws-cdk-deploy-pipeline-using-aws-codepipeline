@@ -206,5 +206,6 @@ export class Sample3ServiceStack extends base.BaseStack {
         new cdk.CfnOutput(this, 'projectName', { value: project.projectName, exportName: 'projectName'});
         new cdk.CfnOutput(this, 'fargateServiceClusterArn', { value: fargateService.service.cluster.clusterArn,  exportName: 'fargateServiceClusterArn'});
         new cdk.CfnOutput(this, 'fargateServiceArn', { value: fargateService.service.serviceArn, exportName: 'fargateServiceArn'});
+        new cdk.CfnOutput(this, 'fargateServiceName', { value: fargateService.service.serviceName, exportName: 'fargateServiceName'});
     }
 }
