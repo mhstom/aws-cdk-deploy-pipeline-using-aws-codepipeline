@@ -204,5 +204,6 @@ export class Sample3ServiceStack extends base.BaseStack {
         new cdk.CfnOutput(this, 'loadbalancerdns', { value: fargateService.loadBalancer.loadBalancerDnsName });
         new cdk.CfnOutput(this, 'projectArn', { value: project.projectArn });
         new cdk.CfnOutput(this, 'fargateServiceClusterArn', { value: fargateService.service.cluster.clusterArn});
+        new cdk.CfnOutput(this, 'fargateServiceArn', { value: fargateService.service.serviceArn});
     }
 }
