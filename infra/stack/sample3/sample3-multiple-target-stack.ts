@@ -41,7 +41,7 @@ export class Sample3MultipleTargetStack extends base.PipelineBaseStack {
                 Detail: {
                     AppConfigFile: "config/app-config-sample3-test.json",
                     BuildDeployStacks: {
-                        StackNameList: ["ServiceStack"],
+                        StackNameList: ["Infrastructure"],
                     }
                 }
             },
@@ -62,7 +62,7 @@ export class Sample3MultipleTargetStack extends base.PipelineBaseStack {
                 Detail: {
                     AppConfigFile: "config/app-config-sample3-prod.json",
                     BuildDeployStacks: {
-                        StackNameList: ["ServiceStack"],
+                        StackNameList: ["Infrastructure"],
                     }
                 }
             }
