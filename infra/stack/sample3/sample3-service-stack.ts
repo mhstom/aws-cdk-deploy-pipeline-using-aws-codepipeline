@@ -198,6 +198,22 @@ export class Sample3ServiceStack extends base.BaseStack {
             ],
           resources: [`${cluster.clusterArn}`],
         }));
+
+        project.addToRolePolicy(new iam.PolicyStatement({
+            actions: [
+                "s3:Abort*",
+                "s3:DeleteObject*",
+                "s3:GetBucket*",
+                "s3:GetObject*",
+                "s3:List*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging"
+              ],
+            resources: ["*"],
+          }));
     
         new cdk.CfnOutput(this, "image" + resourceSuffix, { value: ecrRepo.repositoryUri+":latest"} )
         new cdk.CfnOutput(this, 'loadbalancerdns' + resourceSuffix , { value: fargateService.loadBalancer.loadBalancerDnsName });
