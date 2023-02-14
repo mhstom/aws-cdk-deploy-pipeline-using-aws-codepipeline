@@ -139,7 +139,7 @@ export class Sample3ServiceStack extends base.BaseStack {
               value: `${ecrRepo.repositoryUri}`
             },
             'container_image_file': {
-              value: '[{\"name\":\"Container-' + resourceSuffix + '\",\"imageUri\":\"%s\"}]'
+              value: '[{\"name\":\"container-' + resourceSuffix + '\",\"imageUri\":\"%s\"}]'
             },
             'github_person_token': {
               value: githubPersonalTokenSecretName,
