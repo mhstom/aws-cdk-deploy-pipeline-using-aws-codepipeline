@@ -82,13 +82,17 @@ export class Sample3ServiceStack extends base.BaseStack {
         });
     
         taskDef.addToExecutionRolePolicy(executionRolePolicy);
-    
+        
+        const stage = appContext.appConfig.Project.Stage
         const baseImage = 'public.ecr.aws/amazonlinux/amazonlinux:2022'
         const container = taskDef.addContainer("container-" + resourceSuffix, {
           image: ecs.ContainerImage.fromRegistry(baseImage),
           memoryLimitMiB: 256,
           cpu: 256,
-          logging
+          logging,
+          environment: {
+                "STAGE": stage,
+          }
         });
     
         container.addPortMappings({
